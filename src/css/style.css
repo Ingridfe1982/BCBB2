@@ -1,1 +1,9 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+.board {
+  background-color: blue;
+  color: white;
+}
+
+.topic th {
+  padding-left: 40px;
+}
+/*# sourceMappingURL=style.css.map */
