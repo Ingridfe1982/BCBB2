@@ -3,7 +3,21 @@
   color: white;
 }
 
+.board a {
+  color: white;
+}
+
+.board a:hover {
+  text-decoration: none;
+  color: #c3c3c3;
+}
+
 .topic th {
   padding-left: 40px;
+}
+
+.topicName {
+  background-color: blueviolet;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

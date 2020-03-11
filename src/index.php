@@ -17,7 +17,11 @@ include('_nav.php');
         foreach($boards as $board) {
             echo '
                 <tr class="board">
-                    <th scope="row">'.$board["name"].'</th>
+                    <th scope="row">
+                        <a href="board.php?idBoard='.$board["id"].'&boardName= '.$board["name"].'">    
+                            '.$board["name"].  ' - ' .$board["description"].'
+                        </a>
+                    </th>
                 </tr>
             ';
 
@@ -42,7 +46,11 @@ include('_nav.php');
             foreach($topics as $topic) {
                 echo'
                     <tr class="topic">
-                        <th scope="row">'.$topic["title"].'</th>
+                        <th scope="row">
+                            <a href="topic.php?idTopic='.$topic["id"].'">
+                                '.$topic["title"].'
+                            </a>
+                        </th>
                     </tr>
                 ';
             }
