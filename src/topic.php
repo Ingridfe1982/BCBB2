@@ -41,7 +41,7 @@ $topic = $reqTopic->fetch();
                 echo'
                     <tr class="message">
                         <th scope="row">
-                            avatar
+                            <img src="https://www.gravatar.com/avatar/ alt="">
                         </th>
                         <td>
                             '.$message["content"].'
