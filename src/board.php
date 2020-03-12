@@ -32,13 +32,19 @@ $topics = $req->fetchAll();
     <tbody>
         <tr class="board">
             <th scope="row"><?php echo $boardName; ?></th>
+            <td class="text-right">
+                <a href="topic_add.php?idBoard=<?php echo $idBoard; ?>">
+                    <button type="button" class="btn btn-success btn-sm" >Ajouter un sujet</button>
+                </a>
+            </td>
         </tr>
+
         <?php
             foreach($topics as $topic) {
                 echo'
                     <tr class="topic">
                         <th scope="row">
-                            <a href="topic.php?idTopic='.$topic["id"].'">
+                            <a href="topic.php?idTopic='.$topic["id_topic"].'">
                                 '.$topic["title"].'
                             </a>
                         </th>
@@ -48,3 +54,6 @@ $topics = $req->fetchAll();
         ?>
     </tbody>
 </table>
+<?php
+include("_footer.php");
+?>

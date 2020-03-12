@@ -13,6 +13,7 @@ if (isset($_GET["idTopic"])) {
 include('_header.php');
 include('_nav.php');
 
+
 $req = $db->prepare('SELECT * FROM messages WHERE id_topic = :idTopic');
 $req->execute(array(
     'idTopic' => $idTopic
@@ -20,7 +21,7 @@ $req->execute(array(
 $messages = $req->fetchAll();
 // echo '<pre>' . var_export($messages, true) . '</pre>';die;
 
-$reqTopic = $db->prepare('SELECT * FROM topics WHERE id = :idTopic');
+$reqTopic = $db->prepare('SELECT * FROM topics WHERE id_topic = :idTopic');
 $reqTopic->execute(array(
     'idTopic' => $idTopic
 ));
@@ -35,6 +36,11 @@ $topic = $reqTopic->fetch();
             <th scope="row" colspan="2">
                 <?php echo $topic["title"];?>
             </th>
+            <td class="text-right">
+                <a href="message_add.php?idTopic=<?php echo $idTopic; ?>">
+                    <button type="button" class="btn btn-success btn-sm" >Ajouter un message</button>
+                </a>
+            </td>
         </tr>
         <?php
             foreach($messages as $message) {
@@ -46,9 +52,17 @@ $topic = $reqTopic->fetch();
                         <td>
                             '.$message["content"].'
                         </td>
+                        <td>
+                            <a href="message_update.php?messageId='.$message["id_message"].'&topicId='.$idTopic.'">
+                                <button type="button" class="btn btn-warning btn-sm" >Modifier message</button>
+                            </a>
+                        </td>
                     </tr>
                 ';
             }
         ?>
     </tbody>
 </table>
+<?php
+include("_footer.php");
+?>

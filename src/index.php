@@ -18,7 +18,7 @@ include('_nav.php');
             echo '
                 <tr class="board">
                     <th scope="row">
-                        <a href="board.php?idBoard='.$board["id"].'&boardName= '.$board["name"].'">    
+                        <a href="board.php?idBoard='.$board["id_board"].'&boardName= '.$board["name"].'">    
                             '.$board["name"].  ' - ' .$board["description"].'
                         </a>
                     </th>
@@ -28,26 +28,30 @@ include('_nav.php');
             $queryTopics =
                 'SELECT * 
                 FROM topics t
-                --  LEFT JOIN messages m
-                --  ON m.id_topic = t.id
-                RIGHT JOIN messages m
-                ON t.id = m.id_topic
+                 LEFT JOIN messages m
+                 ON m.id_topic = t.id_topic
+                -- RIGHT JOIN messages m
+                -- ON t.id = m.id_topic
                 WHERE id_board = :idBoard 
-                ORDER BY m.edition_date DESC
+                ORDER BY m.creation_date DESC
                 LIMIT 3
                 ';
 
+
             $reqTopics = $db->prepare($queryTopics);
             $reqTopics->execute(array(
-                'idBoard'=> $board["id"]
+                'idBoard'=> $board["id_board"]
             ));
             $topics = $reqTopics->fetchAll();
+            
+            // echo '<pre>' . var_export($topics, true) . '</pre>';die;
+
 
             foreach($topics as $topic) {
                 echo'
                     <tr class="topic">
                         <th scope="row">
-                            <a href="topic.php?idTopic='.$topic["id"].'">
+                            <a href="topic.php?idTopic='.$topic["id_topic"].'">
                                 '.$topic["title"].'
                             </a>
                         </th>
