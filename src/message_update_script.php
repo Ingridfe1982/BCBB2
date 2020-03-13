@@ -7,6 +7,7 @@ $topicId = $_POST["idTopic"];
 $messageId = $_POST["idMessage"];
 $editionDate = new DateTime("now");
 
+checkUserAccess('messages', $messageId);
 // var_dump($_POST);die;
 // var_dump($creationDate->format("Y-m-d H:i:s"));die;
 

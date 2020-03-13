@@ -1,7 +1,8 @@
 <?php
 if (empty(session_id())) {session_start();}
+
 include_once('_functions.php');
-$db = openDb();
+ifUserLogOffRedirect();
 
 // echo '<pre>' . var_export($boards, true) . '</pre>';die;
 

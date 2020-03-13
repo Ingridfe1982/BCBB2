@@ -1,22 +1,26 @@
-$red: rgb(240, 207, 207);
-
 .board {
     background-color: blue;
     color: white;
-    a{
+
+    a {
+
         color: white;
-        &:hover{
+        &:hover {
             text-decoration: none;
             color: rgb(195, 195, 195);
         }
     } 
 }
 .topic {
-    th{
+
+    th {
         padding-left: 40px;
     }
 }
 .topicName {
     background-color: blueviolet;
+    color: white;
+}
+.fa-pencil {
     color: white;
 }

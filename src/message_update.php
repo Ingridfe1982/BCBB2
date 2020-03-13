@@ -1,12 +1,12 @@
 <?php
 if (empty(session_id())) {session_start();}
+
 include_once('_functions.php');
+ifUserLogOffRedirect();
+
 $db = openDb();
 
 // echo '<pre>' . var_export($boards, true) . '</pre>';die;
-
-include('_header.php');
-include('_nav.php');
 
 $messageId = (isset($_GET["messageId"]) ? $_GET["messageId"] : null);
 $topicId = (isset($_GET["topicId"]) ? $_GET["topicId"] : null);
@@ -17,7 +17,12 @@ $req->execute(array(
 ));
 $message = $req->fetch();
 
-// var_dump($message);die;
+checkUserAccess('messages', $messageId);
+
+include('_header.php');
+include('_nav.php');
+
+// var_dump($message['id_user']);die;
 ?>
 
 <div class="container">

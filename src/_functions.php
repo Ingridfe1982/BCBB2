@@ -27,6 +27,8 @@ function addMessage($db, $dataForm, $topicId) {
         'userId' => $userId,
         'topicId' => $topicId
     ));
+
+    header('Location: topic.php?idTopic='.$topicId.'');
 }
 
 function login($db, $dataForm) {
@@ -51,6 +53,30 @@ function login($db, $dataForm) {
     header("Location: index.php");
 }
 
-function checkAccessUser() {
+function ifUserLogOffRedirect() {
     
+    if (empty($_SESSION["userId"])) {
+        header('Location: login.php?error=userLogOff');die;
+    }
+}
+
+function checkUserAccess($table, $rowId) {
+
+    switch ($table) {
+        case 'messages':
+
+            $db = openDb();
+
+            $req = $db->prepare('SELECT * FROM messages WHERE id_message = :rowId');
+            $req->execute(array(
+                'rowId' => $rowId
+            ));
+            $message = $req->fetch();
+
+            if ($_SESSION["userId"] != $message['id_user']) {
+                header('Location: '.$_SERVER['HTTP_REFERER'].'');die;
+            }
+        break;
+    }
+  
 }

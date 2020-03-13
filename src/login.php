@@ -8,6 +8,9 @@ if (isset($_GET["error"])) {
         case 'incorrectPassword':
             $error = "Mot de passe incorrect";
             break;
+        case 'userLogOff':
+            $error = "Vous devez vous connecter pour pouvoir participer à la discussion";
+            break;
     }
 }
 ?>
@@ -35,6 +38,9 @@ if (isset($_GET["error"])) {
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Connexion</button>
+                <a href="register.php">
+                    <div class="btn btn-primary">Créer un compte</div>
+                </a>
             </div>
         </form>
         </div>

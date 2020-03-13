@@ -1,16 +1,16 @@
 <?php
 if (empty(session_id())) {session_start();}
 
+include_once('_functions.php');
+ifUserLogOffRedirect();
+
 include('_header.php');
 include('_nav.php');
-include_once('_functions.php');
-
-checkAccessUser();
 
 $db = openDb();
 $req = $db->prepare('SELECT * FROM users WHERE email = :email');
 $req->execute(array(
-    'email' =>$_SESSION["email"]
+    'email' => $_SESSION["email"]
 ));
 // echo '<pre>' . var_export($req->fetch(), true) . '</pre>';die;
 $userData = $req->fetch();
@@ -37,14 +37,6 @@ $userData = $req->fetch();
                 <label for="signature">Signature</label>
                 <textarea name="signature" class="form-control" id="signature" rows="3"> <?php echo $userData["signature"]; ?> </textarea>
             </div>
-
-
-            <!-- <input type="hidden" value="
-            <?php 
-            // echo $userData["id"]
-             ?>
-            "> -->
-
 
             <div class="text-center">
             <button type="submit"  class="btn btn-primary mb-2">Modifier</button>

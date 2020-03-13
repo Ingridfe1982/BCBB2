@@ -9,5 +9,3 @@ $topicId = $_POST["idTopic"];
 // var_dump($creationDate->format("Y-m-d H:i:s"));die;
 
 addMessage($db, $_POST, $topicId);
-
-header('Location: topic.php?idTopic='.$topicId.'');
