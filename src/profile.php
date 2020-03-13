@@ -1,8 +1,12 @@
 <?php
 if (empty(session_id())) {session_start();}
+
 include('_header.php');
 include('_nav.php');
 include_once('_functions.php');
+
+checkAccessUser();
+
 $db = openDb();
 $req = $db->prepare('SELECT * FROM users WHERE email = :email');
 $req->execute(array(

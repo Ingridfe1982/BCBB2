@@ -15,4 +15,4 @@ $req->execute(array(
 	'avatar' => $avatar
 ));
 
-header('Location: index.php');
+login($db, $_POST);
