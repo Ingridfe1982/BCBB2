@@ -9,13 +9,6 @@ $idTopic = (isset($_GET["idTopic"]) ? $_GET["idTopic"] : null);
 include('_header.php');
 include('_nav.php');
 
-$req = $db->prepare('SELECT * FROM messages WHERE id_topic = :idTopic');
-$req->execute(array(
-    'idTopic' => $idTopic
-));
-$messages = $req->fetchAll();
-// echo '<pre>' . var_export($messages, true) . '</pre>';die;
-
 $reqTopic = $db->prepare('SELECT * FROM topics WHERE id_topic = :idTopic');
 $reqTopic->execute(array(
     'idTopic' => $idTopic
@@ -23,6 +16,22 @@ $reqTopic->execute(array(
 $topic = $reqTopic->fetch();
 // echo '<pre>' . var_export($topic, true) . '</pre>';die;
 
+$queryMessagesAndUser = 
+    'SELECT * 
+     FROM messages m
+     LEFT JOIN users u
+     ON m.id_user = u.id_user
+     WHERE id_topic = :idTopic
+    ';
+
+$req = $db->prepare($queryMessagesAndUser);
+$req->execute(array(
+    'idTopic' => $idTopic
+));
+$messagesAndUser = $req->fetchAll();
+// echo '<pre>' . var_export($messagesAndUser, true) . '</pre>';die;
+
+// var_dump($messagesAndUser);die;
 ?>
 
 <table class="table">
@@ -38,17 +47,17 @@ $topic = $reqTopic->fetch();
             </td>
         </tr>
         <?php
-            foreach($messages as $message) {
+            foreach($messagesAndUser as $messageAndUser) {
                 echo'
                     <tr class="message">
                         <th scope="row">
-                            <img src="https://www.gravatar.com/avatar/ alt="">
+                            <img src="https://www.gravatar.com/avatar/'.$messageAndUser['avatar'].' alt="">
                         </th>
                         <td>
-                            '.$message["content"].'
+                            '.$messageAndUser["content"].'
                         </td>
                         <td>
-                            <a href="message_update.php?messageId='.$message["id_message"].'&topicId='.$idTopic.'">
+                            <a href="message_update.php?messageId='.$messageAndUser["id_message"].'&topicId='.$idTopic.'">
                                 <button type="button" class="btn btn-warning btn-sm" >Modifier message</button>
                             </a>
                         </td>
