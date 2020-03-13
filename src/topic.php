@@ -33,51 +33,59 @@ $messagesAndUser = $req->fetchAll();
 
 // var_dump($messagesAndUser);die;
 ?>
-
-<table class="table">
-    <tbody>
-        <tr class="topicName" >
-            <th scope="row" colspan="2">
-                <?php echo $topic["title"];?>
-            </th>
-            <td class="text-right">
-                <a href="message_add.php?idTopic=<?php echo $idTopic; ?>">
-                    <button type="button" class="btn btn-success btn-sm">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                </a>
-            </td>
-        </tr>
-        <?php
-            foreach($messagesAndUser as $messageAndUser) { ?>
-              
-                <tr class="message">
-                    <th scope="row">
-                        <img src="https://www.gravatar.com/avatar/<?php echo $messageAndUser["avatar"]; ?>' alt="">
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <tbody>
+                <tr class="topicName" >
+                    <th scope="row" colspan="2">
+                        <?php echo $topic["title"];?>
                     </th>
-                    <td>
-                        <?php echo $messageAndUser["content"]; ?>
-                    </td>
-                    <td>
-                        <?php if (!empty($_SESSION["userId"]) && $_SESSION["userId"] == $messageAndUser['id_user']) { ?>
-                            <a href="message_update.php?messageId=<?php echo $messageAndUser["id_message"]; ?>&topicId=<?php echo $idTopic; ?>">
-                                <button type="button" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </button>
-                            </a>
-                            <a href="message_delete_script.php?messageId=<?php echo $messageAndUser["id_message"]; ?>&topicId=<?php echo $idTopic; ?>">
-                                <button type="button" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </button>
-                            </a>
-                        <?php } ?>
+                    <td class="text-right">
+                        <a href="message_add.php?idTopic=<?php echo $idTopic; ?>">
+                            <button type="button" class="btn btn-success btn-sm">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     </td>
                 </tr>
-            <?php    
-            }
-        ?>
-    </tbody>
-</table>
+                <?php
+                    foreach($messagesAndUser as $messageAndUser) { ?>
+                    
+                        <tr class="message">
+                            <th scope="row">
+                                <img src="https://www.gravatar.com/avatar/<?php echo $messageAndUser["avatar"]; ?>' alt="">
+                            </th>
+                            <td>
+                                <?php echo $messageAndUser["edition_date"]; ?>
+                                <hr>
+                                <?php echo $messageAndUser["content"]; ?>
+                                <hr>
+                                <?php echo $messageAndUser["signature"]; ?>
+                            </td>
+                            <td class="text-right">
+                                <?php if (!empty($_SESSION["userId"]) && $_SESSION["userId"] == $messageAndUser['id_user']) { ?>
+                                    <a href="message_update.php?messageId=<?php echo $messageAndUser["id_message"]; ?>&topicId=<?php echo $idTopic; ?>">
+                                        <button type="button" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                    <a href="message_delete_script.php?messageId=<?php echo $messageAndUser["id_message"]; ?>&topicId=<?php echo $idTopic; ?>">
+                                        <button type="button" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php    
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <?php
 include("_footer.php");

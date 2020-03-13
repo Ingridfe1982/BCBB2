@@ -1,12 +1,20 @@
+$blue: #006699;
+
+/* Commons */
+a {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
 .board {
-    background-color: blue;
+    background-color: $blue;
     color: white;
 
     a {
-
         color: white;
+
         &:hover {
-            text-decoration: none;
             color: rgb(195, 195, 195);
         }
     } 
@@ -16,6 +24,14 @@
     th {
         padding-left: 40px;
     }
+    a {
+        color: $blue;
+    }
+    &__edition_date {
+        color: #666;
+        font-size: 13px;
+        padding-top: 14px;
+    }
 }
 .topicName {
     background-color: blueviolet;
@@ -23,4 +39,12 @@
 }
 .fa-pencil {
     color: white;
+}
+
+//Fix to display correctly dropdown-menu in navbar
+.navbar {
+    .dropdown-menu {
+        left: inherit;
+        right: 0;
+    }
 }

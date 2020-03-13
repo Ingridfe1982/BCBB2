@@ -23,7 +23,7 @@ function addMessage($db, $dataForm, $topicId) {
     $req->execute(array(
         'content' => $dataForm['content'],
         'creationDate' => $creationDate->format("Y-m-d H:i:s"),
-        'editionDate' => null,
+        'editionDate' => $creationDate->format("Y-m-d H:i:s"),
         'userId' => $userId,
         'topicId' => $topicId
     ));
@@ -46,9 +46,10 @@ function login($db, $dataForm) {
         header("Location: login.php?error=incorrectPassword");
     }
     
+    $_SESSION["userId"] = $userData['id_user'];
     $_SESSION["nickname"] = $userData['nickname'];
     $_SESSION['email'] = $userData['email'];
-    $_SESSION["userId"] = $userData['id_user'] ;
+    $_SESSION["avatar"] = $userData['avatar'];
     
     header("Location: index.php");
 }

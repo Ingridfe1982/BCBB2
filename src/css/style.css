@@ -1,5 +1,10 @@
+/* Commons */
+a:hover {
+  text-decoration: none;
+}
+
 .board {
-  background-color: blue;
+  background-color: #006699;
   color: white;
 }
 
@@ -8,12 +13,21 @@
 }
 
 .board a:hover {
-  text-decoration: none;
   color: #c3c3c3;
 }
 
 .topic th {
   padding-left: 40px;
+}
+
+.topic a {
+  color: #006699;
+}
+
+.topic__edition_date {
+  color: #666;
+  font-size: 13px;
+  padding-top: 14px;
 }
 
 .topicName {
@@ -23,5 +37,10 @@
 
 .fa-pencil {
   color: white;
+}
+
+.navbar .dropdown-menu {
+  left: inherit;
+  right: 0;
 }
 /*# sourceMappingURL=style.css.map */

@@ -19,35 +19,38 @@ $req->execute(array(
 $topics = $req->fetchAll();
 
 ?>
-
-<table class="table">
-    <tbody>
-        <tr class="board">
-            <th scope="row"><?php echo $boardName; ?></th>
-            <td class="text-right">
-                <a href="topic_add.php?idBoard=<?php echo $idBoard; ?>">
-                    <button type="button" class="btn btn-success btn-sm">Ajouter un sujet</button>
-                </a>
-            </td>
-        </tr>
-
-        <?php
-
-        foreach($topics as $topic) {
-            echo'
-                <tr class="topic">
-                    <th scope="row">
-                        <a href="topic.php?idTopic='.$topic["id_topic"].'">
-                            '.$topic["title"].'
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <tbody>
+                <tr class="board">
+                    <th scope="row"><?php echo $boardName; ?></th>
+                    <td class="text-right">
+                        <a href="topic_add.php?idBoard=<?php echo $idBoard; ?>">
+                            <button type="button" class="btn btn-success btn-sm">Ajouter un sujet</button>
                         </a>
-                    </th>
+                    </td>
                 </tr>
-            ';
-        }
-        
-        ?>
-    </tbody>
-</table>
+
+                <?php
+
+                foreach($topics as $topic) {
+                    echo'
+                        <tr class="topic">
+                            <th scope="row">
+                                <a href="topic.php?idTopic='.$topic["id_topic"].'">
+                                    '.$topic["title"].'
+                                </a>
+                            </th>
+                        </tr>
+                    ';
+                }
+                
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 <?php
 include("_footer.php");
 ?>
