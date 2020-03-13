@@ -17,8 +17,5 @@ $req->execute(array(
     'editionDate' => $editionDate->format("Y-m-d H:i:s") 
 ));
 
-
-
 header('Location: topic.php?idTopic='.$topicId.'');
-
 ?>

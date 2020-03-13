@@ -1,4 +1,5 @@
 <?php
+
 if (empty(session_id())) {session_start();}
 include_once('_functions.php');
 $db = openDb();
@@ -8,24 +9,15 @@ $db = openDb();
 include('_header.php');
 include('_nav.php');
 
-// Verifie que le paramètre passé par l'url (la valeur) est bien définie
-if (isset($_GET["idBoard"])) {
-    $idBoard = $_GET["idBoard"];
-} else {
-    $idBoard = null;
-}
-
-if (isset($_GET["boardName"])) {
-    $boardName = $_GET["boardName"];
-} else {
-    $boardName= null;
-}
+$idBoard = (isset($_GET["idBoard"]) ? $_GET["idBoard"] : null);
+$boardName = (isset($_GET["boardName"]) ? $_GET["boardName"] : null);
 
 $req = $db->prepare('SELECT * FROM topics WHERE id_board = :idBoard');
 $req->execute(array(
     'idBoard' => $idBoard
 ));
 $topics = $req->fetchAll();
+
 ?>
 
 <table class="table">
@@ -34,23 +26,25 @@ $topics = $req->fetchAll();
             <th scope="row"><?php echo $boardName; ?></th>
             <td class="text-right">
                 <a href="topic_add.php?idBoard=<?php echo $idBoard; ?>">
-                    <button type="button" class="btn btn-success btn-sm" >Ajouter un sujet</button>
+                    <button type="button" class="btn btn-success btn-sm">Ajouter un sujet</button>
                 </a>
             </td>
         </tr>
 
         <?php
-            foreach($topics as $topic) {
-                echo'
-                    <tr class="topic">
-                        <th scope="row">
-                            <a href="topic.php?idTopic='.$topic["id_topic"].'">
-                                '.$topic["title"].'
-                            </a>
-                        </th>
-                    </tr>
-                ';
-            }
+
+        foreach($topics as $topic) {
+            echo'
+                <tr class="topic">
+                    <th scope="row">
+                        <a href="topic.php?idTopic='.$topic["id_topic"].'">
+                            '.$topic["title"].'
+                        </a>
+                    </th>
+                </tr>
+            ';
+        }
+        
         ?>
     </tbody>
 </table>

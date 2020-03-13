@@ -8,12 +8,8 @@ $db = openDb();
 include('_header.php');
 include('_nav.php');
 
-// Verifie que le paramètre passé par l'url (la valeur) est bien définie
-if (isset($_GET["idTopic"])) {
-    $idTopic = $_GET["idTopic"];
-} else {
-    $idTopic = null;
-}
+$idTopic = (isset($_GET["idTopic"]) ? $_GET["idTopic"] : null);
+
 ?>
 <div class="container">
     <div class="row">
@@ -23,7 +19,6 @@ if (isset($_GET["idTopic"])) {
                 <label for="content">Message</label>
                 <textarea name="content" class="form-control" id="content" rows="3"></textarea>
             </div>
-
 
             <input type="hidden" name="idTopic" value="<?php echo $idTopic; ?>"> 
             

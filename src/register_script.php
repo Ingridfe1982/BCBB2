@@ -14,5 +14,3 @@ $req->execute(array(
 	'nickname' => $_POST['nickname'],
 	'avatar' => $avatar
 ));
-
-?>

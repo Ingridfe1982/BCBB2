@@ -8,17 +8,8 @@ $db = openDb();
 include('_header.php');
 include('_nav.php');
 
-// Verifie que le paramètre passé par l'url (la valeur) est bien définie
-if (isset($_GET["messageId"])) {
-    $messageId = $_GET["messageId"];
-} else {
-    $messageId = null;
-}
-if (isset($_GET["topicId"])) {
-    $topicId = $_GET["topicId"];
-} else {
-    $topicId = null;
-}
+$messageId = (isset($_GET["messageId"]) ? $_GET["messageId"] : null);
+$topicId = (isset($_GET["topicId"]) ? $_GET["topicId"] : null);
 
 $req = $db->prepare('SELECT * FROM messages WHERE id_message = :idMessage');
 $req->execute(array(
@@ -28,6 +19,7 @@ $message = $req->fetch();
 
 // var_dump($message);die;
 ?>
+
 <div class="container">
     <div class="row">
         <div class="col-12">

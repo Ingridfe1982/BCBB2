@@ -7,9 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       
-      
       <?php
-      
       if (empty($_SESSION["nickname"])){
         echo '
         <li class="nav-item active">
@@ -29,8 +27,6 @@
         ';
       }
       ?>
-      
     </ul>
-    
   </div>
 </nav>

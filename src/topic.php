@@ -4,15 +4,10 @@ include_once('_functions.php');
 $db = openDb();
 // echo '<pre>' . var_export($boards, true) . '</pre>';die;
 
-if (isset($_GET["idTopic"])) {
-    $idTopic = $_GET["idTopic"];
-} else {
-    $idTopic = null;
-}
+$idTopic = (isset($_GET["idTopic"]) ? $_GET["idTopic"] : null);
 
 include('_header.php');
 include('_nav.php');
-
 
 $req = $db->prepare('SELECT * FROM messages WHERE id_topic = :idTopic');
 $req->execute(array(
@@ -63,6 +58,7 @@ $topic = $reqTopic->fetch();
         ?>
     </tbody>
 </table>
+
 <?php
 include("_footer.php");
 ?>

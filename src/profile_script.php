@@ -11,7 +11,7 @@ $req->execute(array(
 	'password' => password_hash($_POST["password"], PASSWORD_DEFAULT),
     'signature' => $_POST["signature"],
     'userId' => $_SESSION["userId"]
-    ));
+));
 
 header("Location: profile.php");
     

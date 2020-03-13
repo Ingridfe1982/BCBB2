@@ -26,16 +26,14 @@ include('_nav.php');
             ';
 
             $queryTopics =
-                'SELECT * 
+              'SELECT * 
                 FROM topics t
-                 LEFT JOIN messages m
-                 ON m.id_topic = t.id_topic
-                -- RIGHT JOIN messages m
-                -- ON t.id = m.id_topic
+                LEFT JOIN messages m
+                ON m.id_topic = t.id_topic
                 WHERE id_board = :idBoard 
                 ORDER BY m.creation_date DESC
                 LIMIT 3
-                ';
+              ';
 
 
             $reqTopics = $db->prepare($queryTopics);
@@ -46,41 +44,21 @@ include('_nav.php');
             
             // echo '<pre>' . var_export($topics, true) . '</pre>';die;
 
-
             foreach($topics as $topic) {
-                echo'
-                    <tr class="topic">
-                        <th scope="row">
-                            <a href="topic.php?idTopic='.$topic["id_topic"].'">
-                                '.$topic["title"].'
-                            </a>
-                        </th>
-                    </tr>
-                ';
+              echo'
+                  <tr class="topic">
+                      <th scope="row">
+                          <a href="topic.php?idTopic='.$topic["id_topic"].'">
+                              '.$topic["title"].'
+                          </a>
+                      </th>
+                  </tr>
+              ';
             }
         }
         ?>
     </tbody>
 </table>
-<!-- <table class="table">
-  <tbody>
-    <tr class="board">
-      <th scope="row">General</th>
-    </tr>
-    <tr class="topic">
-      <th scope="row">Topic 1</th>
-    </tr>
-    <tr class="board">
-      <th scope="row">Development</th>
-    </tr>
-    <tr class="board">
-      <th scope="row">Smalltalk</th>
-    </tr>
-    <tr class="board">
-      <th scope="row">Events</th>
-    </tr>
-  </tbody>
-</table> -->
 
 <?php
 include('_footer.php');

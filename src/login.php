@@ -18,17 +18,9 @@ if (isset($_GET["error"])) {
 
         <?php
             if (!empty($error)) {
-            
-                echo '
-                    <div class="alert alert-danger" role="alert">
-                        
-                        ' . $error . '
-                        
-                    </div>
-                ';
+                echo ' <div class="alert alert-danger" role="alert">' . $error . '</div>';
             }
         ?>
-
 
         <form action="login_script.php" method="post">
             <div class="form-row">
@@ -48,6 +40,7 @@ if (isset($_GET["error"])) {
         </div>
     </div>
 </div>
+
 <?php
 include('_footer.php');
 ?>

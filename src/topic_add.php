@@ -8,12 +8,8 @@ $db = openDb();
 include('_header.php');
 include('_nav.php');
 
-// Verifie que le paramètre passé par l'url (la valeur) est bien définie
-if (isset($_GET["idBoard"])) {
-    $idBoard = $_GET["idBoard"];
-} else {
-    $idBoard = null;
-}
+$idBoard = (isset($_GET["idBoard"]) ? $_GET["idBoard"] : null);
+
 ?>
 <div class="container">
     <div class="row">
