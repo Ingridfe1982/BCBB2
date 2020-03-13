@@ -14,3 +14,5 @@ $req->execute(array(
 	'nickname' => $_POST['nickname'],
 	'avatar' => $avatar
 ));
+
+header('Location: index.php');

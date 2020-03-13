@@ -10,4 +10,4 @@ $topicId = $_POST["idTopic"];
 
 addMessage($db, $_POST, $topicId);
 
-?>
+header('Location: topic.php?idTopic='.$topicId.'');
