@@ -32,9 +32,39 @@ $messagesAndUser = $req->fetchAll();
 // echo '<pre>' . var_export($messagesAndUser, true) . '</pre>';die;
 
 // var_dump($messagesAndUser);die;
+
+$isCurrentUserCreateThisTopic = ($topic['id_user'] == $_SESSION['userId'] ? true : false);
+
+if (isset($_GET["success"])) {
+
+    switch ($_GET["success"]) {
+        case 'topicLocked':
+            $success = "Le sujet a bien été bloqué";
+            break;
+    }
+}
+if (isset($_GET["error"])) {
+
+    switch ($_GET["error"]) {
+        case 'topicLocked':
+            $error = "Impossible d'ajouter des messages, le sujet est bloqué";
+            break;
+    }
+}
+
 ?>
 <div class="container">
     <div class="row">
+
+        <?php
+            if (!empty($success)) {
+                echo ' <div class="alert alert-success col-12 text-center" role="alert">' . $success . '</div>';
+            }
+            if (!empty($error)) {
+                echo ' <div class="alert alert-danger col-12 text-center" role="alert">' . $error . '</div>';
+            }
+        ?>
+
         <table class="table">
             <tbody>
                 <tr class="topicName" >
@@ -42,6 +72,21 @@ $messagesAndUser = $req->fetchAll();
                         <?php echo $topic["title"];?>
                     </th>
                     <td class="text-right">
+                        <?php
+                        if ($isCurrentUserCreateThisTopic && !$topic['is_locked']) { ?>
+                            <a href="topic_lock_script.php?idTopic=<?php echo $idTopic; ?>">
+                                <button type="button" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        <?php
+                        } else { ?>
+                            <button type="button" class="btn btn-primary btn-sm disabled">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </button>
+                        <?php
+                        }
+                        ?>
                         <a href="message_add.php?idTopic=<?php echo $idTopic; ?>">
                             <button type="button" class="btn btn-success btn-sm">
                                 <i class="fa fa-plus" aria-hidden="true"></i>

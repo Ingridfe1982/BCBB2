@@ -18,6 +18,10 @@ function addMessage($db, $dataForm, $topicId) {
     $creationDate = new DateTime("now");
     $userId = $_SESSION["userId"];
 
+    $isTopicLocked = getIsTopicLocked($topicId);
+
+    if ($isTopicLocked) { header('Location: topic.php?idTopic='.$topicId.'&error=topicLocked');die; }
+
     $req = $db->prepare('INSERT INTO messages (content, creation_date, edition_date, id_topic, id_user) 
     VALUES(:content, :creationDate, :editionDate, :topicId, :userId)');
     $req->execute(array(
@@ -28,7 +32,23 @@ function addMessage($db, $dataForm, $topicId) {
         'topicId' => $topicId
     ));
 
-    header('Location: topic.php?idTopic='.$topicId.'');
+    header('Location: topic.php?idTopic='.$topicId.'');die;
+}
+
+function getIsTopicLocked($topicId) {
+
+    $db = openDb();
+
+    $req = $db->prepare('SELECT * FROM topics WHERE id_topic = :topicID');
+    $req->execute(array(
+        'topicID' => $topicId
+    ));
+    // echo '<pre>' . var_export($req->fetch(), true) . '</pre>';die;
+    $topic = $req->fetch();
+
+    $isTopicLocked = ($topic['is_locked'] == 1 ? true : false);
+    
+    return $isTopicLocked;
 }
 
 function login($db, $dataForm) {
@@ -51,7 +71,7 @@ function login($db, $dataForm) {
     $_SESSION['email'] = $userData['email'];
     $_SESSION["avatar"] = $userData['avatar'];
     
-    header("Location: index.php");
+    header("Location: index.php");die;
 }
 
 function ifUserLogOffRedirect() {
@@ -63,21 +83,27 @@ function ifUserLogOffRedirect() {
 
 function checkUserAccess($table, $rowId) {
 
+    $db = openDb();
+    
+    $id_column = '';
+    
     switch ($table) {
         case 'messages':
-
-            $db = openDb();
-
-            $req = $db->prepare('SELECT * FROM messages WHERE id_message = :rowId');
-            $req->execute(array(
-                'rowId' => $rowId
-            ));
-            $message = $req->fetch();
-
-            if ($_SESSION["userId"] != $message['id_user']) {
-                header('Location: '.$_SERVER['HTTP_REFERER'].'');die;
-            }
+            $id_column = 'id_message';
         break;
+        case 'topics':
+            $id_column = 'id_topic';
+        break;
+    }
+
+    $req = $db->prepare("SELECT * FROM $table WHERE $id_column = :rowId");
+    $req->execute(array(
+        'rowId' => $rowId
+    ));
+    $result = $req->fetch();
+
+    if ($_SESSION["userId"] != $result['id_user']) {
+        header('Location: index.php');die;
     }
 }
 
