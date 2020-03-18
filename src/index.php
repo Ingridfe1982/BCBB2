@@ -6,6 +6,15 @@ $req = $db->prepare('SELECT * FROM boards');
 $req->execute(array());
 $boards = $req->fetchAll();
 
+if (isset($_GET["error"])) {
+
+    switch ($_GET["error"]) {
+        case 'secretBoard':
+            $error = "Vous devez avoir le bon mot de passe pour avoir accès à cette page";
+            break;
+    }
+}
+
 // echo '<pre>' . var_export($boards, true) . '</pre>';die;
 
 include('_header.php');
@@ -14,6 +23,12 @@ include('_nav.php');
 <div class="container">
     <div class="row">
         
+        <?php
+            if (!empty($error)) {
+                echo ' <div class="alert alert-danger" role="alert">' . $error . '</div>';
+            }
+        ?>
+
         <table class="table">
             <tbody>
                 <?php
@@ -21,7 +36,7 @@ include('_nav.php');
                     echo '
                         <tr class="board">
                             <th scope="row" colspan="3">
-                                <a href="board.php?idBoard='.$board["id_board"].'&boardName= '.$board["name"].'">    
+                                <a href="board.php?idBoard='.$board["id_board"].'&secret=very-secret">    
                                     '.$board["name"].  ' - ' .$board["description"].'
                                 </a>
                             </th>

@@ -79,5 +79,14 @@ function checkUserAccess($table, $rowId) {
             }
         break;
     }
-  
+}
+
+function ifBoardIsSecretAndWrongSecretRedirect($board, $urlParameters) {
+
+    $isSecretBoard = ($board['is_secret'] == 1 ? true : false);
+    $secret = $urlParameters['secret'];
+
+    if ($isSecretBoard && $secret !== 'very-secret') {
+        header('Location: index.php?error=secretBoard');die;
+    }
 }

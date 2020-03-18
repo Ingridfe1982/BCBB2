@@ -6,17 +6,24 @@ $db = openDb();
 
 // echo '<pre>' . var_export($boards, true) . '</pre>';die;
 
-include('_header.php');
-include('_nav.php');
-
 $idBoard = (isset($_GET["idBoard"]) ? $_GET["idBoard"] : null);
-$boardName = (isset($_GET["boardName"]) ? $_GET["boardName"] : null);
 
-$req = $db->prepare('SELECT * FROM topics WHERE id_board = :idBoard');
-$req->execute(array(
+$reqBoard = $db->prepare('SELECT * FROM boards WHERE id_board = :idBoard');
+$reqBoard->execute(array(
     'idBoard' => $idBoard
 ));
-$topics = $req->fetchAll();
+$board = $reqBoard->fetch();
+
+ifBoardIsSecretAndWrongSecretRedirect($board, $_GET);
+
+$reqTopics = $db->prepare('SELECT * FROM topics WHERE id_board = :idBoard');
+$reqTopics->execute(array(
+    'idBoard' => $idBoard
+));
+$topics = $reqTopics->fetchAll();
+
+include('_header.php');
+include('_nav.php');
 
 ?>
 <div class="container">
@@ -24,7 +31,7 @@ $topics = $req->fetchAll();
         <table class="table">
             <tbody>
                 <tr class="board">
-                    <th scope="row"><?php echo $boardName; ?></th>
+                    <th scope="row"><?php echo $board['name']; ?></th>
                     <td class="text-right">
                         <a href="topic_add.php?idBoard=<?php echo $idBoard; ?>">
                             <button type="button" class="btn btn-success btn-sm">Ajouter un sujet</button>
