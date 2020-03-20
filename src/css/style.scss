@@ -1,6 +1,14 @@
 $blue: #006699;
 
 /* Commons */
+body {
+    background-color: grey;
+
+    .container {
+        background-color: white;
+    }
+}
+
 a {
     &:hover {
         text-decoration: none;
@@ -17,26 +25,31 @@ a {
         &:hover {
             color: rgb(195, 195, 195);
         }
-    } 
+    }
 }
+
 .topic {
 
     th {
         padding-left: 40px;
     }
+
     a {
         color: $blue;
     }
+
     &__edition_date {
         color: #666;
         font-size: 13px;
         padding-top: 14px;
     }
 }
+
 .topicName {
-    background-color: blueviolet;
+    background-color: black;
     color: white;
 }
+
 .fa-pencil {
     color: white;
 }

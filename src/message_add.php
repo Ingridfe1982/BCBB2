@@ -18,7 +18,7 @@ $idTopic = (isset($_GET["idTopic"]) ? $_GET["idTopic"] : null);
         <form action="message_add_script.php" method="post">
             <div class="form-group">
                 <label for="content">Message</label>
-                <textarea name="content" class="form-control" id="content" rows="3"></textarea>
+                <textarea data-emojiable="true" name="content" class="form-control" id="content" rows="3"></textarea>
             </div>
 
             <input type="hidden" name="idTopic" value="<?php echo $idTopic; ?>"> 

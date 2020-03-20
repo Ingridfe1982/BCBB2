@@ -31,7 +31,7 @@ include('_nav.php');
         <form action="message_update_script.php" method="post">
             <div class="form-group">
                 <label for="content">Message</label>
-                <textarea name="content" class="form-control" id="content" rows="3"><?php echo $message["content"];?></textarea>
+                <textarea name="content" class="form-control emoji-wysiwyg-editor" id="content" rows="3" data-emojiable="true" data-emoji-input="unicode"><?php echo $message["content"];?></textarea>
             </div>
             <input type="hidden" name="idMessage" value="<?php echo $messageId; ?>"> 
             <input type="hidden" name="idTopic" value="<?php echo $topicId; ?>"> 

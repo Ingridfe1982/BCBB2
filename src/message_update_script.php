@@ -8,7 +8,7 @@ $messageId = $_POST["idMessage"];
 $editionDate = new DateTime("now");
 
 checkUserAccess('messages', $messageId);
-// var_dump($_POST);die;
+// var_dump($_POST['content']);die;
 // var_dump($creationDate->format("Y-m-d H:i:s"));die;
 
 $req = $db->prepare('UPDATE messages SET content = :content, edition_date = :editionDate WHERE id_message = :messageId');

@@ -1,4 +1,12 @@
 /* Commons */
+body {
+  background-color: grey;
+}
+
+body .container {
+  background-color: white;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -31,7 +39,7 @@ a:hover {
 }
 
 .topicName {
-  background-color: blueviolet;
+  background-color: black;
   color: white;
 }
 
