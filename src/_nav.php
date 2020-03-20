@@ -9,7 +9,19 @@
 
       <li class="nav-item dropdown text-center">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="https://www.gravatar.com/avatar/<?php echo $_SESSION["avatar"]; ?>" alt="" class="rounded-circle" width="35px">
+            <?php 
+              if ($_SESSION["photo"] != null) { ?>
+
+                <img src="/img/upload/<?php echo $_SESSION["photo"]?>" alt="" class="rounded-circle" width="35px">
+
+              <?php
+              } else { ?>
+
+                <img src="https://www.gravatar.com/avatar/<?php echo $_SESSION["avatar"]?>" alt="" class="rounded-circle" width="35px" >
+              
+              <?php
+              }
+              ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <?php 

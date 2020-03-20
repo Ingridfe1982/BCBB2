@@ -20,8 +20,26 @@ $userData = $req->fetch();
 <div class="container">
     <div class="row">
         <div class="col-12">
-        <img src="https://www.gravatar.com/avatar/<?php echo $userData["avatar"]?>" alt="">
-        <form action="profile_script.php" method="post">
+            <div class="form-group col-md-6">
+                <?php
+                if ($userData["photo"] != null) { ?>
+
+                    <img src="/img/upload/<?php echo $userData["photo"]?>" width="100" alt="">
+                
+                <?php
+                } else { ?>
+
+                    <img src="https://www.gravatar.com/avatar/<?php echo $userData["avatar"]?>" alt="">
+                <?php
+                }
+                ?>
+
+
+                <form action="profile_script.php" method="post" enctype="multipart/form-data">
+                <label>Modifiez votre photo de profil:</label>
+                <input type="file" name="avatar">
+             
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nickname">Pseudo</label>

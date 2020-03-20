@@ -70,6 +70,7 @@ function login($db, $dataForm) {
     $_SESSION["nickname"] = $userData['nickname'];
     $_SESSION['email'] = $userData['email'];
     $_SESSION["avatar"] = $userData['avatar'];
+    $_SESSION["photo"] = $userData['photo'];
     
     header("Location: index.php");die;
 }
